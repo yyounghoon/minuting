@@ -70,7 +70,7 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: import.meta.env.DEV ? '/' : '/minuting/',
+    // basename: import.meta.env.DEV ? '/' : '/minuting/',
   },
 );
 
