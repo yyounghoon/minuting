@@ -14,5 +14,5 @@ export default defineConfig({
   server: {
     port: 5000,
   },
-  base: 'https://yyounghoon.github.io/minuting/',
+  base: '/minuting/',
 });
