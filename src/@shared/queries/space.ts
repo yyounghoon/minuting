@@ -1,6 +1,7 @@
 import { fetcher } from '../lib/fetcher';
 import { TPublicSpace } from '../types';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 
 export const PUBLIC_SPACE_KEY = 'PUBLIC_SPACE_KEY';
 export const usePublicSpaces = () => {
@@ -11,9 +12,7 @@ export const usePublicSpaces = () => {
   );
 };
 
-export const CREATE_SPACE_KEY = 'CREATE_SPACE_KEY';
-
-type TCreateSpacePayload = {
+export type TCreateSpacePayload = {
   description: string;
   icon: string;
   isPublic: boolean;
@@ -23,4 +22,15 @@ type TCreateSpacePayload = {
     type: 'EDIT' | 'READ' | 'WRITE';
   }[];
   tagIdList: number[];
+};
+export const CREATE_SPACE_KEY = 'CREATE_SPACE_KEY';
+export const useCreateSpace = () => {
+  return useMutation<unknown, AxiosError<unknown>, TCreateSpacePayload>(
+    (payload) =>
+      fetcher({
+        url: '/spaces',
+        method: 'post',
+        data: payload,
+      }),
+  );
 };

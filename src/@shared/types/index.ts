@@ -60,16 +60,17 @@ export type TPublicSpace = {
   }[];
 };
 
+export type TSearchUser = {
+  email: string;
+  name: string;
+  userId: string;
+};
 export type TSearchUserList = {
   error: {
     code: number;
     reason: string;
   };
-  list: {
-    email: string;
-    name: string;
-    userId: string;
-  }[];
+  list: TSearchUser[];
 };
 
 export type TTagList = {
@@ -83,5 +84,17 @@ export type TTagList = {
     name: string;
     orderNum: number;
     type: 'MINUTES' | 'SPACE';
+  }[];
+};
+
+export type TTeamList = {
+  error: {
+    code: number;
+    reason: string;
+  };
+  list: {
+    id: number;
+    name: string;
+    pid: number;
   }[];
 };
