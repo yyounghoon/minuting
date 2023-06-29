@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
+import { Button } from 'antd';
 
 type NavItemProps = {
   title: string;
@@ -16,12 +17,30 @@ function NavItem({ title, path }: NavItemProps) {
 }
 
 function NavList() {
+  const navigate = useNavigate();
+
+  const onLogout = () => {
+    localStorage.clear();
+    navigate('/login')
+  };
+
   return (
-    <ul css={NavListStyles}>
-      <NavItem title="HOME" path={'/dashboard'} />
-      <NavItem title="MY" path={'/myPage'} />
-      <NavItem title="CREATE" path={'/space/create'} />
-    </ul>
+    <div
+      css={css`
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      `}
+    >
+      <ul css={NavListStyles}>
+        <NavItem title="HOME" path={'/dashboard'} />
+        <NavItem title="MY" path={'/myPage'} />
+        <NavItem title="CREATE" path={'/space/create'} />
+      </ul>
+      <Button danger onClick={onLogout}>
+        로그아웃
+      </Button>
+    </div>
   );
 }
 
