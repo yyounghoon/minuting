@@ -4,6 +4,7 @@ import CreateSpacePage from './pages/space/CreateSpacePage';
 import PlaygroundPage from './pages/PlaygroundPage';
 import LoginPage from './pages/auth/LoginPage';
 import Root from './@shared/components/Root';
+import SpaceDashBoardPage from './pages/space/SpaceDashBoardPage';
 
 const router = createBrowserRouter(
   [
@@ -21,7 +22,7 @@ const router = createBrowserRouter(
           children: [
             {
               path: ':id',
-              element: <div>스페이스 대시보드</div>,
+              element: <SpaceDashBoardPage />,
               children: [
                 {
                   path: 'board',
