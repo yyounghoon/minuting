@@ -1,9 +1,8 @@
 import { useForm } from 'antd/es/form/Form';
-import { useUserInfo } from '../../../@shared/queries/user';
-import { useTeamList } from '../../../@shared/queries/company';
 import { useCreateSpace } from '../../../@shared/queries/space';
 import useTag from './useTag';
 import useSearchUserList from './useSearchUser';
+import useSelectTeam from './useSelectTeam';
 
 type TFormValues = {
   description: string;
@@ -16,6 +15,11 @@ type TFormValues = {
     type: 'EDIT' | 'WRITE' | 'READ';
   }[];
   tagIdList: number[];
+  teamPermissionList: {
+    title: string;
+    teamId: number;
+    type: 'EDIT' | 'WRITE' | 'READ';
+  }[];
 };
 
 export default function useCreateSpaceForm() {
@@ -40,17 +44,33 @@ export default function useCreateSpaceForm() {
     setFieldValue,
   });
 
-  const { data: currentUser } = useUserInfo();
-  const { teamList } = useTeamList(currentUser?.value.company.id);
+  const {
+    selectedTeamList,
+    onChangeTeamPermission,
+    onDeleteSelectTeam,
+    onCheck,
+  } = useSelectTeam({ setFieldValue });
+
   const { mutate: mutateCreateSpace } = useCreateSpace();
 
   const onFinish = (values: TFormValues) => {
     console.log('finish values', values);
-    const { description, isPublic, name, selectedUserList, tagIdList } = values;
+    const {
+      description,
+      isPublic,
+      name,
+      selectedUserList,
+      tagIdList,
+      teamPermissionList,
+    } = values;
     const payload = {
       description,
       isPublic,
       name,
+      teamPermissionList: teamPermissionList.map((team) => ({
+        id: team.teamId,
+        type: team.type,
+      })),
       permissionList: selectedUserList.map((user) => ({
         memberId: user.userId,
         type: user.type,
@@ -82,5 +102,9 @@ export default function useCreateSpaceForm() {
     selectedUserList,
     onChangeUserPermission,
     onDeleteSelectUser,
+    selectedTeamList,
+    onChangeTeamPermission,
+    onDeleteSelectTeam,
+    onCheck,
   };
 }
