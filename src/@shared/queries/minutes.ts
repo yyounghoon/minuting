@@ -25,3 +25,44 @@ export const useMinutesList = ({ spaceId, boardId }: TMinutesListParams) => {
     isError,
   };
 };
+
+type TRecentMeetingRes = {
+  error: {
+    code: number;
+    reason: string;
+  };
+  list: {
+    boardId: number;
+    contents: string;
+    createdAt: string;
+    id: number;
+    tagList: [
+      {
+        color: string;
+        name: string;
+      },
+    ];
+    title: string;
+    updatedAt: string;
+  }[];
+};
+
+export const RECENT_MINUTES_LIST = 'RECENT_MINUTES_LIST';
+export const useRecentMeetingList = (spaceId: number) => {
+  const { data, isLoading, isError } = useQuery<TRecentMeetingRes>(
+    [RECENT_MINUTES_LIST],
+    () =>
+      fetcher({
+        url: `/spaces/${spaceId}/minutes/type=recent`,
+      }),
+    { enabled: !!spaceId },
+  );
+
+  return {
+    recentMeetingList: data?.list,
+    isLoading,
+    isError,
+  };
+};
+
+// /spaces/{spaceId}/minutes/type=week // 이번주 회의록
