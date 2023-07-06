@@ -21,7 +21,7 @@ function NavList() {
 
   const onLogout = () => {
     localStorage.clear();
-    navigate('/login')
+    navigate('/login');
   };
 
   return (
@@ -34,7 +34,7 @@ function NavList() {
     >
       <ul css={NavListStyles}>
         <NavItem title="HOME" path={'/dashboard'} />
-        <NavItem title="MY" path={'/myPage'} />
+        {/*<NavItem title="MY" path={'/myPage'} />*/}
         <NavItem title="CREATE" path={'/space/create'} />
       </ul>
       <Button danger onClick={onLogout}>
