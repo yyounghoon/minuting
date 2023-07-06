@@ -11,7 +11,12 @@ function SpaceDashBoardPage() {
 
   return (
     <>
-      <Space direction={'vertical'} size={8} style={{ width: '100%' }}>
+      <Space
+        key={spaceId}
+        direction={'vertical'}
+        size={8}
+        style={{ width: '100%' }}
+      >
         <WeekMinutesList />
         <RecentJoinMeetingList />
         <SearchMinutes />
