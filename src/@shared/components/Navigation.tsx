@@ -35,7 +35,7 @@ function NavList() {
       <ul css={NavListStyles}>
         <NavItem title="HOME" path={'/dashboard'} />
         {/*<NavItem title="MY" path={'/myPage'} />*/}
-        <NavItem title="CREATE" path={'/space/create'} />
+        <NavItem title="CREATE" path={'/minutes/create'} />
       </ul>
       <Button danger onClick={onLogout}>
         로그아웃

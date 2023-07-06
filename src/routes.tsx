@@ -5,6 +5,7 @@ import PlaygroundPage from './pages/PlaygroundPage';
 import LoginPage from './pages/auth/LoginPage';
 import Root from './@shared/components/Root';
 import SpaceDashBoardPage from './pages/space/SpaceDashBoardPage';
+import CreateMinutesPage from './pages/minutes/CreateMinutesPage';
 
 const router = createBrowserRouter(
   [
@@ -43,7 +44,6 @@ const router = createBrowserRouter(
         },
         {
           path: 'minutes',
-          element: <DashboardPage />, // 로그인 후, 진입 페이지
           children: [
             {
               path: ':id',
@@ -51,7 +51,7 @@ const router = createBrowserRouter(
             },
             {
               path: 'create',
-              element: <div>회의록 생성</div>,
+              element: <CreateMinutesPage />,
             },
           ],
         },
