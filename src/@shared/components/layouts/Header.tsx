@@ -32,6 +32,7 @@ const headerStyles = css`
   padding: 0 30px;
   background-color: ${palette.white};
   ${borderStyle}
+  z-index: 999;
 `;
 
 const logoStyle = css`
